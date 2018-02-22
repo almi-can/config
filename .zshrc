@@ -1,3 +1,4 @@
+#一回更新したよ
 # 他のターミナルとヒストリーを共有
 setopt share_history
 
