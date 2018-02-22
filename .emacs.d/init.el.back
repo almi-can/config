@@ -1,0 +1,148 @@
+;;日本語環境設定
+(set-language-environment "Japanese")
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8) 
+
+;;skip op message
+(setq inhibit-startup-message t)
+
+;;no backup and auto save
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+(setq auto-save-list-file-name nil)
+(setq auto-save-list-file-prefix nil)
+
+;; 対応する括弧をハイライトする
+(show-paren-mode 1)
+
+;; カーソル位置の行数をモードライン行に表示する
+(line-number-mode 1)
+
+;; bufferの先頭でカーソルを戻そうとしても音をならなくする
+(defun previous-line (arg)
+  (interactive "p")
+  (condition-case nil
+      (line-move (- arg))
+    (beginning-of-buffer)))
+
+;; bufferの最後でカーソルを動かそうとしても音をならなくする
+(defun next-line (arg)
+  (interactive "p")
+  (condition-case nil
+      (line-move arg)
+    (end-of-buffer)))
+
+;; エラー音をならなくする
+(setq ring-bell-function 'ignore)
+
+;;背景色とかの設定
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (manoj-dark))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;; 1行ずつスクロール
+(setq scroll-conservatively 35
+      scroll-margin 0
+      scroll-step 1)
+(setq comint-scroll-show-maximum-output t) ;; shell-mode
+
+;; ツールバー非表示
+(tool-bar-mode -1)
+
+;; メニューバーを非表示
+(menu-bar-mode -1)
+
+;; スクロールバー非表示
+(set-scroll-bar-mode nil)
+
+;; タブをスペースで扱う
+(setq-default indent-tabs-mode nil)
+
+;; yes or noをy or n
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;;C-zでundo
+(define-key global-map (kbd "C-z") 'undo)
+
+;; IME初期化
+;(w32-ime-initialize)
+
+;; デフォルトIME
+;(setq default-input-method "W32-IME")
+
+;; IME変更
+(global-set-key (kbd "C-\\") 'toggle-input-method)
+
+;; 漢字/変換キー入力時のエラーメッセージ抑止
+(global-set-key (kbd "<M-kanji>") 'ignore)
+(global-set-key (kbd "<kanji>") 'ignore)
+
+;; デフォルトの文字コード
+(set-default-coding-systems 'utf-8-unix)
+
+;; テキストファイル／新規バッファの文字コード
+(prefer-coding-system 'utf-8-unix)
+
+;; ファイル名の文字コード
+(set-file-name-coding-system 'utf-8-unix)
+
+;; キーボード入力の文字コード
+(set-keyboard-coding-system 'utf-8-unix)
+
+;; サブプロセスのデフォルト文字コード
+(setq default-process-coding-system '(undecided-dos . utf-8-unix))
+
+;; 環境依存文字 文字化け対応
+(set-charset-priority 'ascii 'japanese-jisx0208 'latin-jisx0201
+                      'katakana-jisx0201 'iso-8859-1 'cp1252 'unicode)
+(set-coding-system-priority 'utf-8 'euc-jp 'iso-2022-jp 'cp932)
+
+;; デフォルト フォント
+;; (set-face-attribute 'default nil :family "Migu 1M" :height 110)
+(set-face-font 'default "Migu 1M-11:antialias=standard")
+
+;; プロポーショナル フォント
+;; (set-face-attribute 'variable-pitch nil :family "Migu 1M" :height 110)
+(set-face-font 'variable-pitch "Migu 1M-11:antialias=standard")
+
+;; 等幅フォント
+;; (set-face-attribute 'fixed-pitch nil :family "Migu 1M" :height 110)
+(set-face-font 'fixed-pitch "Migu 1M-11:antialias=standard")
+
+;; ツールチップ表示フォント
+;; (set-face-attribute 'tooltip nil :family "Migu 1M" :height 90)
+(set-face-font 'tooltip "Migu 1M-9:antialias=standard")
+
+;;clipboard share
+;(cond (window-system
+;       (setq x-select-enable-clipboard t)
+;       ))
+
+;;to use xclip
+;(require 'xclip)
+;(xclip-mode 1)
+
+;;wsl default font
+;; デフォルト フォント
+(set-face-attribute 'default nil :family "Migu 1M" :height 120)
+;; プロポーショナル フォント
+(set-face-attribute 'variable-pitch nil :family "Migu 1M" :height 120)
+;; 等幅フォント
+(set-face-attribute 'fixed-pitch nil :family "Migu 1M" :height 120)
+;; ツールチップ表示フォント
+(set-face-attribute 'tooltip nil :family "Migu 1M" :height 90)
+;;フォントサイズを変えたいね
+
+;;ここまで
+
